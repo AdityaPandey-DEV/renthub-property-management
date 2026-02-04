@@ -137,41 +137,41 @@ const Home = () => {
                     <div className="absolute top-1/2 left-1/2 w-80 h-80 bg-purple-500/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }}></div>
                 </div>
 
-                <div className="container mx-auto px-4 pt-20 z-10">
-                    <div className="text-center max-w-4xl mx-auto">
-                        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass text-sm text-indigo-300 mb-6">
+                <div className="container mx-auto px-4 z-10 relative">
+                    <div className="flex flex-col items-center justify-center text-center max-w-5xl mx-auto h-full pt-20">
+                        <div className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full glass text-sm text-indigo-300 mb-10 border border-indigo-500/30">
                             <span className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></span>
                             Over 10,000+ verified properties
                         </div>
 
-                        <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight text-white">
+                        <h1 className="text-6xl md:text-8xl font-bold mb-8 leading-tight text-white tracking-tight">
                             Find Your Perfect
-                            <span className="block gradient-text">Rental Home</span>
+                            <span className="block gradient-text mt-2">Rental Home</span>
                         </h1>
-                        <p className="text-xl text-gray-300 mb-10 max-w-2xl mx-auto">
+                        <p className="text-xl md:text-2xl text-gray-300 mb-12 max-w-3xl mx-auto leading-relaxed">
                             Discover thousands of properties, connect with verified landlords, and move into your dream home with RentHub.
                         </p>
 
                         {/* Search Box */}
-                        <div className="glass rounded-2xl p-4 max-w-3xl mx-auto mb-12 border border-white/10">
-                            <div className="flex flex-col md:flex-row gap-4">
-                                <div className="flex-1 relative">
-                                    <HiLocationMarker className="absolute left-4 top-1/2 -translate-y-1/2 text-indigo-400 text-xl" />
+                        <div className="glass rounded-3xl p-3 max-w-4xl w-full mx-auto mb-16 border border-white/10 shadow-2xl backdrop-blur-xl">
+                            <div className="flex flex-col md:flex-row gap-4 p-2">
+                                <div className="flex-1 relative group">
+                                    <HiLocationMarker className="absolute left-6 top-1/2 -translate-y-1/2 text-indigo-400 text-2xl group-focus-within:text-indigo-300 transition-colors" />
                                     <input
                                         type="text"
                                         placeholder="Enter city, locality, or landmark"
-                                        className="input pl-12 bg-slate-800/50 border-slate-700"
+                                        className="input pl-16 h-16 text-lg bg-slate-800/60 border-slate-600/50 focus:bg-slate-800/80 rounded-2xl w-full transition-all"
                                     />
                                 </div>
                                 <div className="flex gap-4">
-                                    <select className="input w-40 bg-slate-800/50 border-slate-700">
+                                    <select className="input w-48 h-16 text-lg bg-slate-800/60 border-slate-600/50 focus:bg-slate-800/80 rounded-2xl cursor-pointer">
                                         <option value="">Room Type</option>
                                         <option value="single">Single</option>
                                         <option value="double">Double</option>
                                         <option value="triple">Triple</option>
                                     </select>
-                                    <Link to="/rooms" className="btn btn-primary whitespace-nowrap px-6">
-                                        <HiSearch />
+                                    <Link to="/rooms" className="btn btn-primary h-16 px-10 text-lg rounded-2xl hover:scale-105 shadow-lg shadow-indigo-500/25">
+                                        <HiSearch className="text-xl" />
                                         Search
                                     </Link>
                                 </div>
@@ -179,11 +179,11 @@ const Home = () => {
                         </div>
 
                         {/* Stats */}
-                        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-3xl mx-auto">
+                        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto w-full">
                             {stats.map((stat, index) => (
-                                <div key={index} className="glass rounded-xl p-4 border border-white/5 animate-fadeIn" style={{ animationDelay: `${index * 0.1}s` }}>
-                                    <p className="text-3xl md:text-4xl font-bold gradient-text">{stat.value}</p>
-                                    <p className="text-gray-400 text-sm">{stat.label}</p>
+                                <div key={index} className="glass rounded-2xl p-6 border border-white/5 animate-fadeIn hover:bg-white/5 transition-all" style={{ animationDelay: `${index * 0.1}s` }}>
+                                    <p className="text-4xl md:text-5xl font-bold gradient-text mb-2">{stat.value}</p>
+                                    <p className="text-gray-400 font-medium">{stat.label}</p>
                                 </div>
                             ))}
                         </div>
@@ -199,19 +199,19 @@ const Home = () => {
             </section>
 
             {/* Featured Properties Section */}
-            <section className="py-20 bg-gray-50 dark:bg-slate-900 transition-colors duration-300">
+            <section className="py-24 lg:py-32 bg-gray-50 dark:bg-slate-900 transition-colors duration-300">
                 <div className="container mx-auto px-4">
-                    <div className="flex items-end justify-between mb-12">
+                    <div className="flex items-end justify-between mb-16">
                         <div>
-                            <span className="text-indigo-400 font-medium mb-2 block">Featured Properties</span>
-                            <h2 className="text-3xl md:text-4xl font-bold">Explore Our Top Picks</h2>
+                            <span className="text-indigo-400 font-bold tracking-wider uppercase text-sm mb-3 block">Featured Properties</span>
+                            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white">Explore Our Top Picks</h2>
                         </div>
-                        <Link to="/rooms" className="hidden md:flex items-center gap-2 text-indigo-400 hover:text-indigo-300 transition-colors">
+                        <Link to="/rooms" className="hidden md:flex items-center gap-2 text-indigo-500 hover:text-indigo-600 dark:text-indigo-400 dark:hover:text-indigo-300 font-semibold text-lg transition-colors">
                             View All Properties <HiArrowRight />
                         </Link>
                     </div>
 
-                    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
                         {featuredProperties.map((property, index) => (
                             <Link
                                 key={property.id}
@@ -282,7 +282,7 @@ const Home = () => {
             </section>
 
             {/* Features Section */}
-            <section className="py-20 relative overflow-hidden">
+            <section className="py-24 lg:py-32 relative overflow-hidden">
                 <div className="absolute inset-0 z-0">
                     <img
                         src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1920&q=60"
@@ -293,15 +293,15 @@ const Home = () => {
                 </div>
 
                 <div className="container mx-auto px-4 relative z-10">
-                    <div className="text-center mb-16">
-                        <span className="text-indigo-400 font-medium mb-2 block">Why Choose Us</span>
-                        <h2 className="text-3xl md:text-4xl font-bold mb-4">Why Choose RentHub?</h2>
-                        <p className="text-gray-400 max-w-2xl mx-auto">
+                    <div className="text-center mb-20">
+                        <span className="text-indigo-400 font-bold tracking-wider uppercase text-sm mb-3 block">Why Choose Us</span>
+                        <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white">Why Choose RentHub?</h2>
+                        <p className="text-gray-400 max-w-2xl mx-auto text-lg leading-relaxed">
                             We make finding and managing rental properties simple, secure, and hassle-free.
                         </p>
                     </div>
 
-                    <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
                         {features.map((feature, index) => (
                             <div
                                 key={index}

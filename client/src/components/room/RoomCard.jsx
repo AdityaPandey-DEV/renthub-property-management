@@ -22,9 +22,8 @@ const RoomCard = ({ room }) => {
     };
 
     return (
-        <Link to={`/rooms/${room._id}`} className="card group">
-            {/* Image */}
-            <div className="relative h-44 overflow-hidden">
+        <div className="card group hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 bg-white dark:bg-slate-800 border border-gray-100 dark:border-slate-700 overflow-hidden flex flex-col h-full">
+            <Link to={`/rooms/${room._id}`} className="relative block h-64 overflow-hidden">
                 <img
                     src={room.images?.[0] || 'https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?w=500'}
                     alt={`Room ${room.roomNumber}`}
@@ -42,68 +41,73 @@ const RoomCard = ({ room }) => {
                 </div>
             </div>
 
-            {/* Content */}
-            <div className="p-4">
-                <div className="flex items-center justify-between mb-2">
-                    <h3 className="font-semibold text-lg group-hover:text-indigo-400 transition-colors">
-                        Room {room.roomNumber}
-                    </h3>
-                    <div className="flex items-center gap-1 text-emerald-400 font-bold">
-                        <HiCurrencyRupee />
-                        <span>{room.rent?.toLocaleString()}</span>
-                        <span className="text-gray-400 text-sm font-normal">/mo</span>
-                    </div>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+            </Link >
+
+    {/* Content */ }
+    < div className = "p-6 flex flex-col flex-1" >
+        <div className="mb-4">
+            <div className="flex justify-between items-start mb-2">
+                <span className="text-xs font-bold uppercase tracking-wider text-indigo-500 dark:text-indigo-400">
+                    {getRoomTypeLabel(room.roomType)}
+                </span>
+                <div className="flex items-center gap-1 text-amber-500">
+                    <span className="text-sm font-bold">4.8</span>
+                    <HiStar />
                 </div>
-
-                {/* Property Info */}
-                {room.property && (
-                    <div className="flex items-center gap-1 text-gray-400 text-sm mb-3">
-                        <HiLocationMarker className="text-indigo-400 shrink-0" />
-                        <span className="line-clamp-1">
-                            {room.property.title} • {room.property.address?.city}
-                        </span>
-                    </div>
-                )}
-
-                {/* Room Details */}
-                <div className="flex items-center gap-4 text-sm text-gray-400 mb-4">
-                    <div className="flex items-center gap-1">
-                        <HiUsers className="text-indigo-400" />
-                        <span>{getRoomTypeLabel(room.roomType)} Sharing</span>
-                    </div>
-                    {room.area && (
-                        <div>
-                            <span>{room.area} sq.ft</span>
-                        </div>
-                    )}
+            </div>
+            <Link to={`/rooms/${room._id}`} className="block">
+                <h3 className="font-bold text-xl text-gray-900 dark:text-white mb-1 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors line-clamp-1">
+                    {room.property?.title || `Room ${room.roomNumber}`}
+                </h3>
+            </Link>
+            {room.property && (
+                <div className="flex items-center gap-1 text-gray-500 dark:text-gray-400 text-sm">
+                    <HiLocationMarker className="shrink-0" />
+                    <span className="line-clamp-1">
+                        {room.property.title} • {room.property.address?.city}
+                    </span>
                 </div>
+            )}
+        </div>
 
-                {/* Amenities */}
-                <div className="flex flex-wrap gap-1 mb-4">
-                    {room.amenities?.slice(0, 4).map((amenity, index) => (
+{/* Amenities */ }
+                <div className="flex flex-wrap gap-2 mb-6">
+                    {room.amenities?.slice(0, 3).map((amenity, index) => (
                         <span
                             key={index}
-                            className="px-2 py-1 rounded-md bg-gray-200 dark:bg-slate-700 text-xs text-gray-700 dark:text-gray-300 capitalize flex items-center gap-1"
+                            className="px-2.5 py-1 rounded-lg bg-gray-100 dark:bg-slate-700/50 text-xs font-medium text-gray-600 dark:text-gray-300 capitalize flex items-center gap-1.5"
                         >
                             <HiCheckCircle className="text-emerald-500 dark:text-emerald-400" />
                             {amenity.replace('_', ' ')}
                         </span>
                     ))}
-                </div>
-
-                {/* Footer */}
-                <div className="flex items-center justify-between pt-3 border-t border-gray-100 dark:border-slate-700">
-                    <span className="text-sm text-gray-500 dark:text-gray-400">
-                        Deposit: <span className="text-gray-900 dark:text-white">₹{room.deposit?.toLocaleString()}</span>
-                    </span>
-                    {room.status === 'vacant' && (
-                        <span className="text-sm text-indigo-400 font-medium">
-                            Book Now →
+                    {(room.amenities?.length > 3) && (
+                        <span className="px-2.5 py-1 rounded-lg bg-gray-100 dark:bg-slate-700/50 text-xs font-medium text-gray-500 dark:text-gray-400">
+                            +{room.amenities.length - 3} more
                         </span>
                     )}
                 </div>
-            </div>
-        </Link>
+
+                <div className="mt-auto pt-4 border-t border-gray-100 dark:border-slate-700 flex items-center justify-between gap-4">
+                    <div>
+                        <div className="flex items-baseline gap-1">
+                            <span className="text-2xl font-bold text-gray-900 dark:text-white">₹{room.rent?.toLocaleString()}</span>
+                            <span className="text-sm text-gray-500 dark:text-gray-400 font-medium">/mo</span>
+                        </div>
+                        {room.deposit > 0 && (
+                             <p className="text-xs text-gray-400 mt-0.5">Dep: ₹{room.deposit?.toLocaleString()}</p>
+                        )}
+                    </div>
+                    <Link
+                        to={`/rooms/${room._id}`}
+                        className="btn btn-primary px-5 py-2.5 rounded-xl text-sm shadow-lg shadow-indigo-500/20 hover:shadow-indigo-500/40 transform hover:-translate-y-0.5 transition-all"
+                    >
+                        View Details
+                    </Link>
+                </div>
+            </div >
+        </div >
     );
 };
 
