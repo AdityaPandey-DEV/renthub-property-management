@@ -78,8 +78,8 @@ const Rooms = () => {
                 </div>
 
                 {/* Search & Filters Bar */}
-                <div className="glass rounded-xl p-4 mb-8">
-                    <div className="flex flex-col md:flex-row gap-4">
+                <div className="glass rounded-2xl p-6 mb-10 shadow-lg">
+                    <div className="flex flex-col lg:flex-row items-center gap-4">
                         <div className="flex-1 relative">
                             <HiLocationMarker className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" />
                             <input
@@ -88,14 +88,14 @@ const Rooms = () => {
                                 value={filters.city}
                                 onChange={handleFilterChange}
                                 placeholder="Search by city..."
-                                className="input pl-11"
+                                className="input pl-12 h-12"
                             />
                         </div>
                         <select
                             name="roomType"
                             value={filters.roomType}
                             onChange={handleFilterChange}
-                            className="input w-full md:w-48"
+                            className="input w-full lg:w-48 h-12"
                         >
                             {roomTypes.map(type => (
                                 <option key={type.value} value={type.value}>{type.label}</option>
@@ -208,8 +208,8 @@ const Rooms = () => {
                                         key={i}
                                         onClick={() => setSearchParams({ ...Object.fromEntries(searchParams), page: i + 1 })}
                                         className={`w-10 h-10 rounded-lg font-medium transition-colors ${pagination.currentPage === i + 1
-                                                ? 'bg-indigo-500 text-white'
-                                                : 'bg-slate-800 text-gray-400 hover:bg-slate-700'
+                                            ? 'bg-indigo-500 text-white'
+                                            : 'bg-slate-800 text-gray-400 hover:bg-slate-700'
                                             }`}
                                     >
                                         {i + 1}

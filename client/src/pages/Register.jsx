@@ -71,20 +71,20 @@ const Register = () => {
                 </div>
 
                 {/* Form Card */}
-                <div className="glass rounded-2xl p-8">
+                <div className="glass rounded-2xl p-10 shadow-xl">
                     <div className="text-center mb-8">
-                        <h1 className="text-2xl font-bold mb-2">Create Account</h1>
-                        <p className="text-gray-400">Join RentHub and find your perfect space</p>
+                        <h1 className="text-3xl font-bold mb-3 text-primary">Create Account</h1>
+                        <p className="text-muted">Join RentHub and find your perfect space</p>
                     </div>
 
                     {/* Role Selector */}
-                    <div className="flex gap-2 mb-6">
+                    <div className="grid grid-cols-2 gap-4 mb-8">
                         <button
                             type="button"
                             onClick={() => setFormData({ ...formData, role: 'tenant' })}
-                            className={`flex-1 py-3 rounded-xl font-medium transition-all ${formData.role === 'tenant'
-                                    ? 'bg-indigo-500 text-white'
-                                    : 'bg-slate-800 text-gray-400 hover:bg-slate-700'
+                            className={`py-3 px-4 rounded-xl font-semibold transition-all border ${formData.role === 'tenant'
+                                ? 'bg-indigo-600 text-white border-indigo-600 shadow-lg shadow-indigo-500/20'
+                                : 'bg-white dark:bg-slate-800 text-muted border-color hover:border-indigo-500/50 hover:bg-gray-50 dark:hover:bg-slate-700'
                                 }`}
                         >
                             I'm a Tenant
@@ -92,9 +92,9 @@ const Register = () => {
                         <button
                             type="button"
                             onClick={() => setFormData({ ...formData, role: 'landlord' })}
-                            className={`flex-1 py-3 rounded-xl font-medium transition-all ${formData.role === 'landlord'
-                                    ? 'bg-emerald-500 text-white'
-                                    : 'bg-slate-800 text-gray-400 hover:bg-slate-700'
+                            className={`py-3 px-4 rounded-xl font-semibold transition-all border ${formData.role === 'landlord'
+                                ? 'bg-emerald-600 text-white border-emerald-600 shadow-lg shadow-emerald-500/20'
+                                : 'bg-white dark:bg-slate-800 text-muted border-color hover:border-emerald-500/50 hover:bg-gray-50 dark:hover:bg-slate-700'
                                 }`}
                         >
                             I'm a Landlord
@@ -103,16 +103,16 @@ const Register = () => {
 
                     <form onSubmit={handleSubmit} className="space-y-4">
                         <div>
-                            <label className="block text-sm font-medium text-gray-300 mb-2">Full Name</label>
+                            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Full Name</label>
                             <div className="relative">
-                                <HiUser className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" />
+                                <HiUser className="absolute left-4 top-1/2 -translate-y-1/2 text-muted text-lg" />
                                 <input
                                     type="text"
                                     name="name"
                                     value={formData.name}
                                     onChange={handleChange}
                                     placeholder="Enter your full name"
-                                    className="input pl-11"
+                                    className="input pl-12"
                                     required
                                 />
                             </div>
@@ -174,16 +174,16 @@ const Register = () => {
                         </div>
 
                         <div>
-                            <label className="block text-sm font-medium text-gray-300 mb-2">Confirm Password</label>
+                            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Confirm Password</label>
                             <div className="relative">
-                                <HiLockClosed className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" />
+                                <HiLockClosed className="absolute left-4 top-1/2 -translate-y-1/2 text-muted text-lg" />
                                 <input
                                     type="password"
                                     name="confirmPassword"
                                     value={formData.confirmPassword}
                                     onChange={handleChange}
                                     placeholder="Confirm your password"
-                                    className="input pl-11"
+                                    className="input pl-12"
                                     required
                                 />
                             </div>

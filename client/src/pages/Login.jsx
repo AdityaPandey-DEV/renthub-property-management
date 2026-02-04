@@ -58,40 +58,40 @@ const Login = () => {
                 </div>
 
                 {/* Form Card */}
-                <div className="glass rounded-2xl p-8">
-                    <div className="text-center mb-8">
-                        <h1 className="text-2xl font-bold mb-2">Welcome Back</h1>
-                        <p className="text-gray-400">Sign in to access your account</p>
+                <div className="glass rounded-2xl p-10 shadow-xl">
+                    <div className="text-center mb-10">
+                        <h1 className="text-3xl font-bold mb-3 text-primary">Welcome Back</h1>
+                        <p className="text-muted">Sign in to access your account</p>
                     </div>
 
                     <form onSubmit={handleSubmit} className="space-y-5">
                         <div>
-                            <label className="block text-sm font-medium text-gray-300 mb-2">Email</label>
+                            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Email</label>
                             <div className="relative">
-                                <HiMail className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" />
+                                <HiMail className="absolute left-4 top-1/2 -translate-y-1/2 text-muted text-lg" />
                                 <input
                                     type="email"
                                     name="email"
                                     value={formData.email}
                                     onChange={handleChange}
                                     placeholder="Enter your email"
-                                    className="input pl-11"
+                                    className="input pl-12"
                                     required
                                 />
                             </div>
                         </div>
 
                         <div>
-                            <label className="block text-sm font-medium text-gray-300 mb-2">Password</label>
+                            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Password</label>
                             <div className="relative">
-                                <HiLockClosed className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" />
+                                <HiLockClosed className="absolute left-4 top-1/2 -translate-y-1/2 text-muted text-lg" />
                                 <input
                                     type={showPassword ? 'text' : 'password'}
                                     name="password"
                                     value={formData.password}
                                     onChange={handleChange}
                                     placeholder="Enter your password"
-                                    className="input pl-11 pr-11"
+                                    className="input pl-12 pr-12"
                                     required
                                 />
                                 <button
@@ -124,18 +124,18 @@ const Login = () => {
                     </form>
 
                     {/* Demo Accounts */}
-                    <div className="mt-6 p-4 rounded-xl bg-slate-800/50 border border-slate-700">
-                        <p className="text-xs text-gray-400 mb-2 text-center">Demo Accounts</p>
-                        <div className="grid grid-cols-2 gap-2 text-xs">
+                    <div className="mt-8 p-5 rounded-xl bg-slate-100 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700">
+                        <p className="text-xs font-semibold text-muted mb-3 text-center uppercase tracking-wider">Demo Accounts</p>
+                        <div className="grid grid-cols-2 gap-3 text-sm">
                             <button
                                 onClick={() => setFormData({ email: 'rajesh@landlord.com', password: 'landlord123' })}
-                                className="px-3 py-2 rounded-lg bg-indigo-500/20 text-indigo-400 hover:bg-indigo-500/30 transition-colors"
+                                className="px-4 py-2.5 rounded-lg border border-indigo-200 dark:border-indigo-500/30 bg-indigo-50 dark:bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 hover:bg-indigo-100 dark:hover:bg-indigo-500/20 transition-all font-medium"
                             >
                                 Landlord
                             </button>
                             <button
                                 onClick={() => setFormData({ email: 'amit@tenant.com', password: 'tenant123' })}
-                                className="px-3 py-2 rounded-lg bg-emerald-500/20 text-emerald-400 hover:bg-emerald-500/30 transition-colors"
+                                className="px-4 py-2.5 rounded-lg border border-emerald-200 dark:border-emerald-500/30 bg-emerald-50 dark:bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 hover:bg-emerald-100 dark:hover:bg-emerald-500/20 transition-all font-medium"
                             >
                                 Tenant
                             </button>
