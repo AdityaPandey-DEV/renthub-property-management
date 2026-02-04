@@ -83,18 +83,18 @@ const RoomCard = ({ room }) => {
                     {room.amenities?.slice(0, 4).map((amenity, index) => (
                         <span
                             key={index}
-                            className="px-2 py-1 rounded-md bg-slate-700 text-xs text-gray-300 capitalize flex items-center gap-1"
+                            className="px-2 py-1 rounded-md bg-gray-200 dark:bg-slate-700 text-xs text-gray-700 dark:text-gray-300 capitalize flex items-center gap-1"
                         >
-                            <HiCheckCircle className="text-emerald-400" />
+                            <HiCheckCircle className="text-emerald-500 dark:text-emerald-400" />
                             {amenity.replace('_', ' ')}
                         </span>
                     ))}
                 </div>
 
                 {/* Footer */}
-                <div className="flex items-center justify-between pt-3 border-t border-slate-700">
-                    <span className="text-sm text-gray-400">
-                        Deposit: <span className="text-white">₹{room.deposit?.toLocaleString()}</span>
+                <div className="flex items-center justify-between pt-3 border-t border-gray-100 dark:border-slate-700">
+                    <span className="text-sm text-gray-500 dark:text-gray-400">
+                        Deposit: <span className="text-gray-900 dark:text-white">₹{room.deposit?.toLocaleString()}</span>
                     </span>
                     {room.status === 'vacant' && (
                         <span className="text-sm text-indigo-400 font-medium">

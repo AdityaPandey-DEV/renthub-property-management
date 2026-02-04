@@ -144,7 +144,7 @@ const Home = () => {
                             Over 10,000+ verified properties
                         </div>
 
-                        <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
+                        <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight text-white">
                             Find Your Perfect
                             <span className="block gradient-text">Rental Home</span>
                         </h1>
@@ -199,7 +199,7 @@ const Home = () => {
             </section>
 
             {/* Featured Properties Section */}
-            <section className="py-20 bg-slate-900">
+            <section className="py-20 bg-gray-50 dark:bg-slate-900 transition-colors duration-300">
                 <div className="container mx-auto px-4">
                     <div className="flex items-end justify-between mb-12">
                         <div>
@@ -319,7 +319,7 @@ const Home = () => {
             </section>
 
             {/* Property Showcase Grid */}
-            <section className="py-20 bg-slate-900/50">
+            <section className="py-20 bg-white dark:bg-slate-900/50 transition-colors duration-300">
                 <div className="container mx-auto px-4">
                     <div className="text-center mb-12">
                         <span className="text-indigo-400 font-medium mb-2 block">Explore</span>
@@ -444,7 +444,7 @@ const Home = () => {
             </section>
 
             {/* Testimonials Section */}
-            <section className="py-20 bg-slate-900/50">
+            <section className="py-20 bg-gray-50 dark:bg-slate-900/50 transition-colors duration-300">
                 <div className="container mx-auto px-4">
                     <div className="text-center mb-16">
                         <span className="text-indigo-400 font-medium mb-2 block">Testimonials</span>

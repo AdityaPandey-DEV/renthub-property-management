@@ -220,11 +220,11 @@ const Rooms = () => {
                     </>
                 ) : (
                     <div className="text-center py-20">
-                        <div className="w-24 h-24 rounded-full bg-slate-800 flex items-center justify-center mx-auto mb-4">
-                            <HiSearch className="text-4xl text-gray-600" />
+                        <div className="w-24 h-24 rounded-full bg-gray-100 dark:bg-slate-800 flex items-center justify-center mx-auto mb-4 transition-colors">
+                            <HiSearch className="text-4xl text-gray-400 dark:text-gray-600" />
                         </div>
-                        <h3 className="text-xl font-semibold mb-2">No rooms found</h3>
-                        <p className="text-gray-400 mb-6">Try adjusting your search filters</p>
+                        <h3 className="text-xl font-semibold mb-2 text-gray-900 dark:text-white">No rooms found</h3>
+                        <p className="text-gray-500 dark:text-gray-400 mb-6">Try adjusting your search filters</p>
                         <button onClick={clearFilters} className="btn btn-primary">
                             Clear Filters
                         </button>
