@@ -1,6 +1,7 @@
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useState } from 'react';
 import { useAuth } from '../../context/AuthContext';
+import { useTheme } from '../../context/ThemeContext';
 import {
     HiHome,
     HiOutlineMenu,
@@ -9,11 +10,14 @@ import {
     HiUserAdd,
     HiLogout,
     HiViewGrid,
-    HiBell
+    HiBell,
+    HiSun,
+    HiMoon
 } from 'react-icons/hi';
 
 const Navbar = () => {
     const { user, isAuthenticated, logout } = useAuth();
+    const { theme, toggleTheme } = useTheme();
     const navigate = useNavigate();
     const location = useLocation();
     const [isOpen, setIsOpen] = useState(false);
@@ -38,7 +42,7 @@ const Navbar = () => {
                 <div className="flex items-center justify-between h-16">
                     {/* Logo */}
                     <Link to="/" className="flex items-center gap-2">
-                        <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-500 to-emerald-500 flex items-center justify-center">
+                        <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-500 to-emerald-500 flex items-center justify-center shadow-lg">
                             <HiHome className="text-white text-xl" />
                         </div>
                         <span className="text-xl font-bold gradient-text">RentHub</span>
@@ -48,48 +52,60 @@ const Navbar = () => {
                     <div className="hidden md:flex items-center gap-6">
                         <Link
                             to="/"
-                            className={`text-sm font-medium transition-colors ${isActive('/') ? 'text-indigo-400' : 'text-gray-300 hover:text-white'}`}
+                            className={`text-sm font-medium transition-colors ${isActive('/') ? 'text-indigo-500' : 'text-secondary hover:text-primary'}`}
                         >
                             Home
                         </Link>
                         <Link
                             to="/properties"
-                            className={`text-sm font-medium transition-colors ${isActive('/properties') ? 'text-indigo-400' : 'text-gray-300 hover:text-white'}`}
+                            className={`text-sm font-medium transition-colors ${isActive('/properties') ? 'text-indigo-500' : 'text-secondary hover:text-primary'}`}
                         >
                             Properties
                         </Link>
                         <Link
                             to="/rooms"
-                            className={`text-sm font-medium transition-colors ${isActive('/rooms') ? 'text-indigo-400' : 'text-gray-300 hover:text-white'}`}
+                            className={`text-sm font-medium transition-colors ${isActive('/rooms') ? 'text-indigo-500' : 'text-secondary hover:text-primary'}`}
                         >
                             Find Rooms
                         </Link>
 
+                        {/* Theme Toggle */}
+                        <button
+                            onClick={toggleTheme}
+                            className="relative p-2 rounded-xl bg-secondary hover:bg-tertiary transition-all duration-300 border border-transparent hover:border-indigo-500/30"
+                            aria-label="Toggle theme"
+                        >
+                            <div className="relative w-5 h-5">
+                                <HiSun className={`absolute inset-0 text-xl text-amber-500 transition-all duration-300 ${theme === 'light' ? 'opacity-100 rotate-0' : 'opacity-0 rotate-90'}`} />
+                                <HiMoon className={`absolute inset-0 text-xl text-indigo-400 transition-all duration-300 ${theme === 'dark' ? 'opacity-100 rotate-0' : 'opacity-0 -rotate-90'}`} />
+                            </div>
+                        </button>
+
                         {isAuthenticated ? (
                             <div className="flex items-center gap-4">
-                                <Link to="/notifications" className="relative p-2 rounded-lg hover:bg-white/10 transition-colors">
-                                    <HiBell className="text-xl text-gray-300" />
+                                <Link to="/notifications" className="relative p-2 rounded-lg hover:bg-tertiary transition-colors">
+                                    <HiBell className="text-xl text-secondary" />
                                     <span className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
                                 </Link>
                                 <Link
                                     to={getDashboardLink()}
-                                    className="flex items-center gap-2 px-4 py-2 rounded-lg bg-indigo-500/20 text-indigo-400 hover:bg-indigo-500/30 transition-colors"
+                                    className="flex items-center gap-2 px-4 py-2 rounded-lg bg-indigo-500/10 text-indigo-500 hover:bg-indigo-500/20 transition-colors"
                                 >
                                     <HiViewGrid />
                                     <span>Dashboard</span>
                                 </Link>
                                 <div className="flex items-center gap-3">
-                                    <div className="w-9 h-9 rounded-full bg-gradient-to-br from-indigo-500 to-purple-500 flex items-center justify-center text-white font-medium">
+                                    <div className="w-9 h-9 rounded-full bg-gradient-to-br from-indigo-500 to-purple-500 flex items-center justify-center text-white font-medium shadow-md">
                                         {user?.name?.charAt(0).toUpperCase()}
                                     </div>
                                     <div className="hidden lg:block">
-                                        <p className="text-sm font-medium text-white">{user?.name}</p>
-                                        <p className="text-xs text-gray-400 capitalize">{user?.role}</p>
+                                        <p className="text-sm font-medium text-primary">{user?.name}</p>
+                                        <p className="text-xs text-muted capitalize">{user?.role}</p>
                                     </div>
                                 </div>
                                 <button
                                     onClick={handleLogout}
-                                    className="p-2 rounded-lg hover:bg-red-500/20 text-red-400 transition-colors"
+                                    className="p-2 rounded-lg hover:bg-red-500/10 text-red-500 transition-colors"
                                 >
                                     <HiLogout className="text-xl" />
                                 </button>
@@ -109,31 +125,40 @@ const Navbar = () => {
                     </div>
 
                     {/* Mobile Menu Button */}
-                    <button
-                        onClick={() => setIsOpen(!isOpen)}
-                        className="md:hidden p-2 rounded-lg hover:bg-white/10"
-                    >
-                        {isOpen ? <HiX className="text-2xl" /> : <HiOutlineMenu className="text-2xl" />}
-                    </button>
+                    <div className="flex items-center gap-3 md:hidden">
+                        <button
+                            onClick={toggleTheme}
+                            className="p-2 rounded-lg bg-secondary"
+                            aria-label="Toggle theme"
+                        >
+                            {theme === 'light' ? <HiMoon className="text-xl text-indigo-500" /> : <HiSun className="text-xl text-amber-400" />}
+                        </button>
+                        <button
+                            onClick={() => setIsOpen(!isOpen)}
+                            className="p-2 rounded-lg hover:bg-secondary"
+                        >
+                            {isOpen ? <HiX className="text-2xl" /> : <HiOutlineMenu className="text-2xl" />}
+                        </button>
+                    </div>
                 </div>
 
                 {/* Mobile Navigation */}
                 {isOpen && (
-                    <div className="md:hidden py-4 border-t border-white/10">
+                    <div className="md:hidden py-4 border-t border-color">
                         <div className="flex flex-col gap-2">
-                            <Link to="/" className="px-4 py-2 rounded-lg hover:bg-white/10" onClick={() => setIsOpen(false)}>Home</Link>
-                            <Link to="/properties" className="px-4 py-2 rounded-lg hover:bg-white/10" onClick={() => setIsOpen(false)}>Properties</Link>
-                            <Link to="/rooms" className="px-4 py-2 rounded-lg hover:bg-white/10" onClick={() => setIsOpen(false)}>Find Rooms</Link>
+                            <Link to="/" className="px-4 py-2 rounded-lg hover:bg-secondary" onClick={() => setIsOpen(false)}>Home</Link>
+                            <Link to="/properties" className="px-4 py-2 rounded-lg hover:bg-secondary" onClick={() => setIsOpen(false)}>Properties</Link>
+                            <Link to="/rooms" className="px-4 py-2 rounded-lg hover:bg-secondary" onClick={() => setIsOpen(false)}>Find Rooms</Link>
 
                             {isAuthenticated ? (
                                 <>
-                                    <Link to={getDashboardLink()} className="px-4 py-2 rounded-lg hover:bg-white/10" onClick={() => setIsOpen(false)}>Dashboard</Link>
-                                    <button onClick={handleLogout} className="px-4 py-2 rounded-lg text-left text-red-400 hover:bg-red-500/20">Logout</button>
+                                    <Link to={getDashboardLink()} className="px-4 py-2 rounded-lg hover:bg-secondary" onClick={() => setIsOpen(false)}>Dashboard</Link>
+                                    <button onClick={handleLogout} className="px-4 py-2 rounded-lg text-left text-red-500 hover:bg-red-500/10">Logout</button>
                                 </>
                             ) : (
                                 <>
-                                    <Link to="/login" className="px-4 py-2 rounded-lg hover:bg-white/10" onClick={() => setIsOpen(false)}>Login</Link>
-                                    <Link to="/register" className="px-4 py-2 rounded-lg hover:bg-white/10" onClick={() => setIsOpen(false)}>Sign Up</Link>
+                                    <Link to="/login" className="px-4 py-2 rounded-lg hover:bg-secondary" onClick={() => setIsOpen(false)}>Login</Link>
+                                    <Link to="/register" className="px-4 py-2 rounded-lg hover:bg-secondary" onClick={() => setIsOpen(false)}>Sign Up</Link>
                                 </>
                             )}
                         </div>
