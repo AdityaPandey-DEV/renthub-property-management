@@ -194,7 +194,7 @@ const Rooms = () => {
                 ) : rooms.length > 0 ? (
                     <>
                         <p className="text-gray-400 mb-6">{pagination.total} rooms found</p>
-                        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10">
                             {rooms.map(room => (
                                 <RoomCard key={room._id} room={room} />
                             ))}

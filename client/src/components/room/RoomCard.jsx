@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { HiLocationMarker, HiCurrencyRupee, HiUsers, HiCheckCircle } from 'react-icons/hi';
+import { HiLocationMarker, HiCurrencyRupee, HiUsers, HiCheckCircle, HiStar } from 'react-icons/hi';
 
 const RoomCard = ({ room }) => {
     const getRoomTypeLabel = (type) => {
@@ -35,43 +35,41 @@ const RoomCard = ({ room }) => {
                     </span>
                 </div>
                 <div className="absolute top-3 right-3">
-                    <span className="badge badge-info">
+                    <span className="badge badge-info shadow-lg">
                         {getRoomTypeLabel(room.roomType)}
                     </span>
                 </div>
-            </div>
-
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
-            </Link >
-
-    {/* Content */ }
-    < div className = "p-6 flex flex-col flex-1" >
-        <div className="mb-4">
-            <div className="flex justify-between items-start mb-2">
-                <span className="text-xs font-bold uppercase tracking-wider text-indigo-500 dark:text-indigo-400">
-                    {getRoomTypeLabel(room.roomType)}
-                </span>
-                <div className="flex items-center gap-1 text-amber-500">
-                    <span className="text-sm font-bold">4.8</span>
-                    <HiStar />
-                </div>
-            </div>
-            <Link to={`/rooms/${room._id}`} className="block">
-                <h3 className="font-bold text-xl text-gray-900 dark:text-white mb-1 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors line-clamp-1">
-                    {room.property?.title || `Room ${room.roomNumber}`}
-                </h3>
             </Link>
-            {room.property && (
-                <div className="flex items-center gap-1 text-gray-500 dark:text-gray-400 text-sm">
-                    <HiLocationMarker className="shrink-0" />
-                    <span className="line-clamp-1">
-                        {room.property.title} • {room.property.address?.city}
-                    </span>
-                </div>
-            )}
-        </div>
 
-{/* Amenities */ }
+            {/* Content */}
+            <div className="p-6 flex flex-col flex-1">
+                <div className="mb-4">
+                    <div className="flex justify-between items-start mb-2">
+                        <span className="text-xs font-bold uppercase tracking-wider text-indigo-500 dark:text-indigo-400">
+                            {getRoomTypeLabel(room.roomType)}
+                        </span>
+                        <div className="flex items-center gap-1 text-amber-500">
+                            <span className="text-sm font-bold">4.8</span>
+                            <HiStar />
+                        </div>
+                    </div>
+                    <Link to={`/rooms/${room._id}`} className="block">
+                        <h3 className="font-bold text-xl text-gray-900 dark:text-white mb-1 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors line-clamp-1">
+                            {room.property?.title || `Room ${room.roomNumber}`}
+                        </h3>
+                    </Link>
+                    {room.property && (
+                        <div className="flex items-center gap-1 text-gray-500 dark:text-gray-400 text-sm">
+                            <HiLocationMarker className="shrink-0" />
+                            <span className="line-clamp-1">
+                                {room.property.title} • {room.property.address?.city}
+                            </span>
+                        </div>
+                    )}
+                </div>
+
+                {/* Amenities */}
                 <div className="flex flex-wrap gap-2 mb-6">
                     {room.amenities?.slice(0, 3).map((amenity, index) => (
                         <span
@@ -96,7 +94,7 @@ const RoomCard = ({ room }) => {
                             <span className="text-sm text-gray-500 dark:text-gray-400 font-medium">/mo</span>
                         </div>
                         {room.deposit > 0 && (
-                             <p className="text-xs text-gray-400 mt-0.5">Dep: ₹{room.deposit?.toLocaleString()}</p>
+                            <p className="text-xs text-gray-400 mt-0.5">Dep: ₹{room.deposit?.toLocaleString()}</p>
                         )}
                     </div>
                     <Link
@@ -106,8 +104,8 @@ const RoomCard = ({ room }) => {
                         View Details
                     </Link>
                 </div>
-            </div >
-        </div >
+            </div>
+        </div>
     );
 };
 
