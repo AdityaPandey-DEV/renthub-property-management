@@ -16,7 +16,7 @@ const app = express();
 
 // CORS configuration
 app.use(cors({
-    origin: process.env.CLIENT_URL || 'http://localhost:5173',
+    origin: ['http://localhost:5173', 'https://renthub-property-management.vercel.app'],
     credentials: true
 }));
 
