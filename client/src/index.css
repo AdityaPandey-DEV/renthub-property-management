@@ -4,8 +4,48 @@
 @import "tailwindcss";
 
 /* ===== CSS Variables for Theming ===== */
+/* Light Theme - Peach/Pink Palette + WhatsApp Colors */
+.light {
+  /* Cream/Peach Backgrounds */
+  --bg-primary: #FFF7CD;
+  --bg-secondary: #FFFDF5;
+  --bg-tertiary: #FFE8CC;
+  --bg-card: #ffffff;
+  --bg-glass: rgba(255, 247, 205, 0.95);
+
+  --text-primary: #280905;
+  --text-secondary: #740A03;
+  --text-muted: #8C6A5D;
+
+  --border-color: #FDC3A1;
+  --border-hover: #F57799;
+
+  /* Accents */
+  --accent-primary: #FB9B8F;
+  /* Salmon */
+  --accent-secondary: #F57799;
+  /* Pink */
+
+  /* WhatsApp Specific - Light */
+  --wa-bg-app: #d1d7db;
+  --wa-bg-header: #f0f2f5;
+  --wa-bg-chat: #efeae2;
+  --wa-bg-message-out: #d9fdd3;
+  --wa-bg-message-in: #ffffff;
+  --wa-header-primary: #54656f;
+  --wa-text-primary: #111b21;
+  --wa-text-secondary: #667781;
+  --wa-teal: #00a884;
+  --wa-check-blue: #53bdeb;
+
+  --shadow-sm: 0 1px 2px 0 rgba(139, 92, 246, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(245, 119, 153, 0.1);
+  --shadow-lg: 0 10px 15px -3px rgba(245, 119, 153, 0.15);
+  --shadow-glow: 0 0 20px rgba(251, 155, 143, 0.3);
+}
+
+/* Dark Theme (Default) - Red/Brown Palette + WhatsApp Colors */
 :root {
-  /* Dark Theme (Default) - Red/Brown Palette */
   /* Dark Brown Backgrounds */
   --bg-primary: #280905;
   --bg-secondary: #3E0C06;
@@ -30,38 +70,22 @@
   --accent-danger: #C3110C;
   --accent-info: #3b82f6;
 
+  /* WhatsApp Specific - Dark */
+  --wa-bg-app: #0b141a;
+  --wa-bg-header: #202c33;
+  --wa-bg-chat: #0b141a;
+  --wa-bg-message-out: #005c4b;
+  --wa-bg-message-in: #202c33;
+  --wa-header-primary: #e9edef;
+  --wa-text-primary: #e9edef;
+  --wa-text-secondary: #8696a0;
+  --wa-teal: #00a884;
+  --wa-check-blue: #53bdeb;
+
   --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
   --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.5);
   --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
   --shadow-glow: 0 0 20px rgba(195, 17, 12, 0.2);
-}
-
-/* Light Theme - Peach/Pink Palette */
-.light {
-  /* Cream/Peach Backgrounds */
-  --bg-primary: #FFF7CD;
-  --bg-secondary: #FFFDF5;
-  --bg-tertiary: #FFE8CC;
-  --bg-card: #ffffff;
-  --bg-glass: rgba(255, 247, 205, 0.95);
-
-  --text-primary: #280905;
-  --text-secondary: #740A03;
-  --text-muted: #8C6A5D;
-
-  --border-color: #FDC3A1;
-  --border-hover: #F57799;
-
-  /* Accents */
-  --accent-primary: #FB9B8F;
-  /* Salmon */
-  --accent-secondary: #F57799;
-  /* Pink */
-
-  --shadow-sm: 0 1px 2px 0 rgba(139, 92, 246, 0.05);
-  --shadow-md: 0 4px 6px -1px rgba(245, 119, 153, 0.1);
-  --shadow-lg: 0 10px 15px -3px rgba(245, 119, 153, 0.15);
-  --shadow-glow: 0 0 20px rgba(251, 155, 143, 0.3);
 }
 
 /* ===== Base Styles ===== */
@@ -419,4 +443,47 @@ body {
 
 .bg-tertiary {
   background: var(--bg-tertiary);
+}
+
+/* ===== WhatsApp Specific Styles ===== */
+.wa-doodle-bg {
+  background-color: var(--wa-bg-chat);
+  background-image: url("https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png");
+  background-repeat: repeat;
+  background-size: 500px auto;
+  opacity: 1;
+}
+
+.dark .wa-doodle-bg {
+  opacity: 0.06;
+}
+
+.light .wa-doodle-bg {
+  opacity: 0.4;
+  background-blend-mode: overlay;
+}
+
+/* Message Tails */
+.wa-tail-out {
+  position: absolute;
+  top: 0;
+  right: -8px;
+  width: 0;
+  height: 0;
+  border-left: 8px solid var(--wa-bg-message-out);
+  border-top: 8px solid transparent;
+  border-bottom: 8px solid transparent;
+  transform: rotate(-45deg) translateY(6px);
+}
+
+.wa-tail-in {
+  position: absolute;
+  top: 0;
+  left: -8px;
+  width: 0;
+  height: 0;
+  border-right: 8px solid var(--wa-bg-message-in);
+  border-top: 8px solid transparent;
+  border-bottom: 8px solid transparent;
+  transform: rotate(45deg) translateY(6px);
 }

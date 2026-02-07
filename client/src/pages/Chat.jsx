@@ -11,16 +11,19 @@ const Chat = () => {
     }, []);
 
     return (
-        <div className="pt-16 h-screen bg-gray-50 dark:bg-slate-900 flex justify-center">
-            <div className="container mx-auto p-4 h-full">
-                <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-xl overflow-hidden h-[calc(100vh-6rem)] border border-gray-200 dark:border-slate-700 flex">
+        <div className="pt-16 h-screen bg-[var(--wa-bg-app)] flex justify-center items-center min-h-[600px]">
+            {/* Green background strip for desktop (WhatsApp Web style) */}
+            <div className="hidden md:block fixed top-0 left-0 w-full h-32 bg-[var(--wa-teal)] z-0"></div>
+
+            <div className="container mx-auto p-0 md:p-4 h-full relative z-10 max-w-[1600px]">
+                <div className="bg-[var(--wa-bg-app)] md:shadow-lg rounded-none md:rounded-xl overflow-hidden h-full border-0 flex">
                     {/* Chat List Sidebar - Hidden on mobile when chat is open */}
-                    <div className={`${currentChat ? 'hidden md:block' : 'w-full'} md:w-1/3 lg:w-1/4 h-full border-r border-gray-200 dark:border-slate-700`}>
+                    <div className={`${currentChat ? 'hidden md:flex' : 'flex'} w-full md:w-[30%] lg:w-[30%] flex-col h-full border-r border-[var(--wa-header-primary)]/10 bg-[var(--wa-bg-header)]`}>
                         <ChatList />
                     </div>
 
                     {/* Chat Window - Hidden on mobile when no chat selected */}
-                    <div className={`${!currentChat ? 'hidden md:block' : 'w-full'} md:w-2/3 lg:w-3/4 h-full`}>
+                    <div className={`${!currentChat ? 'hidden md:flex' : 'flex'} w-full md:w-[70%] lg:w-[70%] flex-col h-full bg-[var(--wa-bg-chat)] relative`}>
                         <ChatWindow />
                     </div>
                 </div>
