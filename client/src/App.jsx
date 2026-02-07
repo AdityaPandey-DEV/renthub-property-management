@@ -17,6 +17,10 @@ import PropertyDetail from './pages/PropertyDetail';
 // Landlord Pages
 import LandlordDashboard from './pages/landlord/Dashboard';
 import AddProperty from './pages/landlord/AddProperty';
+import Properties from './pages/landlord/Properties';
+import Bookings from './pages/landlord/Bookings';
+import Rentals from './pages/landlord/Rentals';
+import Payments from './pages/landlord/Payments';
 
 // Tenant Pages
 import TenantDashboard from './pages/tenant/Dashboard';
@@ -53,6 +57,46 @@ function App() {
                   element={
                     <ProtectedRoute roles={['landlord', 'admin']}>
                       <AddProperty />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path="/landlord/properties/new"
+                  element={
+                    <ProtectedRoute roles={['landlord', 'admin']}>
+                      <AddProperty />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path="/landlord/properties"
+                  element={
+                    <ProtectedRoute roles={['landlord', 'admin']}>
+                      <Properties />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path="/landlord/bookings"
+                  element={
+                    <ProtectedRoute roles={['landlord', 'admin']}>
+                      <Bookings />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path="/landlord/rentals"
+                  element={
+                    <ProtectedRoute roles={['landlord', 'admin']}>
+                      <Rentals />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path="/landlord/payments"
+                  element={
+                    <ProtectedRoute roles={['landlord', 'admin']}>
+                      <Payments />
                     </ProtectedRoute>
                   }
                 />
