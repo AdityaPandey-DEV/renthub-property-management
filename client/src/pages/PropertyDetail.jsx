@@ -107,11 +107,13 @@ const PropertyDetail = () => {
                                 </div>
                                 <div>
                                     <p className="text-sm text-gray-400">Total Rooms</p>
-                                    <p className="font-semibold">{property.totalRooms}</p>
+                                    <p className="font-semibold">{property.rooms?.length || property.totalRooms || 0}</p>
                                 </div>
                                 <div>
                                     <p className="text-sm text-gray-400">Available</p>
-                                    <p className="font-semibold text-emerald-400">{property.availableRooms}</p>
+                                    <p className="font-semibold text-emerald-400">
+                                        {property.rooms ? property.rooms.filter(r => r.status === 'vacant').length : (property.availableRooms || 0)}
+                                    </p>
                                 </div>
                                 <div>
                                     <p className="text-sm text-gray-400">Views</p>
