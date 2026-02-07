@@ -28,6 +28,10 @@ exports.getRooms = async (req, res, next) => {
             roomQuery.amenities = { $all: amenityList };
         }
 
+        console.log('Room Query:', JSON.stringify(roomQuery));
+        const totalDocs = await Room.countDocuments(roomQuery);
+        console.log('Total Rooms Matching Query (before populate/filter):', totalDocs);
+
         const skip = (page - 1) * limit;
 
         // Get rooms with property details
@@ -48,20 +52,28 @@ exports.getRooms = async (req, res, next) => {
             .limit(parseInt(limit))
             .sort({ createdAt: -1 });
 
-        // Filter out rooms where property didn't match
-        rooms = rooms.filter(room => room.property !== null);
+        console.log(`Fetched ${rooms.length} rooms. checking for null properties...`);
 
-        const total = rooms.length;
+        // Filter out rooms where property didn't match
+        const validRooms = rooms.filter(room => room.property !== null);
+        console.log(`Valid rooms after filter: ${validRooms.length}`);
+
+        // FIX: Total should be total matching query, but technically we should filter first.
+        // However, accurate count with population filter requires aggregation.
+        // For now, let's just return totalDocs as total, closest approximation.
+        // Or better: if we are not filtering by city/state (which affects property), 
+        // then totalDocs is accurate assuming all properties are active.
 
         res.status(200).json({
             success: true,
-            count: rooms.length,
-            total,
-            pages: Math.ceil(total / limit),
+            count: validRooms.length,
+            total: totalDocs, // Changed from rooms.length to totalDocs
+            pages: Math.ceil(totalDocs / limit),
             currentPage: parseInt(page),
-            data: rooms
+            data: validRooms
         });
     } catch (error) {
+        console.error('getRooms Error:', error);
         next(error);
     }
 };
