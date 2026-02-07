@@ -11,6 +11,7 @@ const Rooms = () => {
     const [rooms, setRooms] = useState([]);
     const [loading, setLoading] = useState(true);
     const [showFilters, setShowFilters] = useState(false);
+    const [showSearchModal, setShowSearchModal] = useState(false);
     const [pagination, setPagination] = useState({ total: 0, pages: 1, currentPage: 1 });
 
     const [filters, setFilters] = useState({
@@ -58,6 +59,7 @@ const Rooms = () => {
     const clearFilters = () => {
         setFilters({ city: '', roomType: '', minRent: '', maxRent: '' });
         setSearchParams({});
+        setShowSearchModal(false);
     };
 
     const roomTypes = [
@@ -78,9 +80,10 @@ const Rooms = () => {
                 </div>
 
                 {/* Search & Filters Bar */}
-                <div className="glass rounded-2xl p-6 mb-10 shadow-lg">
+                {/* Search & Filters - Desktop & Tablet */}
+                <div className="hidden md:block glass rounded-2xl p-6 mb-10 shadow-lg">
                     <div className="flex flex-col lg:flex-row items-center gap-4">
-                        <div className="flex-1 relative">
+                        <div className="flex-1 relative min-w-[250px]">
                             <HiLocationMarker className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" />
                             <input
                                 type="text"
@@ -88,7 +91,7 @@ const Rooms = () => {
                                 value={filters.city}
                                 onChange={handleFilterChange}
                                 placeholder="Search by city..."
-                                className="input pl-12 h-12"
+                                className="input !pl-14 h-12"
                             />
                         </div>
                         <select
@@ -101,12 +104,6 @@ const Rooms = () => {
                                 <option key={type.value} value={type.value}>{type.label}</option>
                             ))}
                         </select>
-                        <button
-                            onClick={() => setShowFilters(!showFilters)}
-                            className="btn btn-secondary md:hidden"
-                        >
-                            <HiFilter /> Filters
-                        </button>
                         <div className="hidden md:flex items-center gap-4">
                             <input
                                 type="number"
@@ -130,34 +127,122 @@ const Rooms = () => {
                             <HiSearch /> Search
                         </button>
                     </div>
+                </div>
 
-                    {/* Mobile Filters */}
-                    {showFilters && (
-                        <div className="md:hidden mt-4 pt-4 border-t border-slate-700">
-                            <div className="grid grid-cols-2 gap-4 mb-4">
-                                <input
-                                    type="number"
-                                    name="minRent"
-                                    value={filters.minRent}
-                                    onChange={handleFilterChange}
-                                    placeholder="Min ₹"
-                                    className="input"
-                                />
-                                <input
-                                    type="number"
-                                    name="maxRent"
-                                    value={filters.maxRent}
-                                    onChange={handleFilterChange}
-                                    placeholder="Max ₹"
-                                    className="input"
-                                />
-                            </div>
-                            <button onClick={clearFilters} className="text-red-400 text-sm">
-                                Clear all filters
+                {/* Mobile Search Trigger */}
+                <div className="md:hidden mb-8">
+                    <button
+                        onClick={() => setShowSearchModal(true)}
+                        className="w-full glass rounded-xl p-4 flex items-center gap-3 shadow-lg active:scale-95 transition-transform"
+                    >
+                        <div className="w-10 h-10 rounded-full bg-indigo-500/20 flex items-center justify-center text-indigo-400">
+                            <HiSearch className="text-xl" />
+                        </div>
+                        <div className="flex-1 text-left">
+                            <p className="font-semibold text-sm">Find your perfect room</p>
+                            <p className="text-xs text-gray-400 truncate">
+                                {filters.city ? filters.city : 'Search by city, type, or budget...'}
+                            </p>
+                        </div>
+                        <div className="w-8 h-8 rounded-full border border-gray-600 flex items-center justify-center">
+                            <HiFilter className="text-gray-400" />
+                        </div>
+                    </button>
+                </div>
+
+                {/* Mobile Search Modal */}
+                {showSearchModal && (
+                    <div className="fixed inset-0 z-[60] bg-zinc-950/95 backdrop-blur-xl flex flex-col animate-fadeIn">
+                        {/* Modal Header */}
+                        <div className="p-4 flex items-center justify-between border-b border-white/10">
+                            <h2 className="text-lg font-semibold">Search Rooms</h2>
+                            <button
+                                onClick={() => setShowSearchModal(false)}
+                                className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20"
+                            >
+                                <HiX />
                             </button>
                         </div>
-                    )}
-                </div>
+
+                        {/* Modal Content */}
+                        <div className="flex-1 overflow-y-auto p-4 space-y-6">
+                            <div className="space-y-2">
+                                <label className="text-sm font-medium text-gray-400">City</label>
+                                <div className="relative">
+                                    <HiLocationMarker className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-xl" />
+                                    <input
+                                        type="text"
+                                        name="city"
+                                        value={filters.city}
+                                        onChange={handleFilterChange}
+                                        placeholder="Enter city name..."
+                                        className="input !pl-14 h-14 text-lg"
+                                        autoFocus
+                                    />
+                                </div>
+                            </div>
+
+                            <div className="space-y-2">
+                                <label className="text-sm font-medium text-gray-400">Room Type</label>
+                                <div className="grid grid-cols-2 gap-3">
+                                    {roomTypes.map(type => (
+                                        <button
+                                            key={type.value}
+                                            onClick={() => handleFilterChange({ target: { name: 'roomType', value: type.value } })}
+                                            className={`p-3 rounded-xl border transition-all ${filters.roomType === type.value
+                                                ? 'bg-indigo-500/20 border-indigo-500 text-white'
+                                                : 'bg-white/5 border-white/10 hover:bg-white/10 text-gray-400'
+                                                }`}
+                                        >
+                                            {type.label}
+                                        </button>
+                                    ))}
+                                </div>
+                            </div>
+
+                            <div className="space-y-2">
+                                <label className="text-sm font-medium text-gray-400">Monthly Rent (₹)</label>
+                                <div className="flex items-center gap-4">
+                                    <input
+                                        type="number"
+                                        name="minRent"
+                                        value={filters.minRent}
+                                        onChange={handleFilterChange}
+                                        placeholder="Min"
+                                        className="input h-14"
+                                    />
+                                    <span className="text-gray-400">-</span>
+                                    <input
+                                        type="number"
+                                        name="maxRent"
+                                        value={filters.maxRent}
+                                        onChange={handleFilterChange}
+                                        placeholder="Max"
+                                        className="input h-14"
+                                    />
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Modal Footer */}
+                        <div className="p-4 border-t border-white/10 bg-zinc-900/50 safe-area-bottom">
+                            <div className="flex gap-3">
+                                <button
+                                    onClick={clearFilters}
+                                    className="btn btn-secondary flex-1 py-4 text-base"
+                                >
+                                    Clear
+                                </button>
+                                <button
+                                    onClick={() => { applyFilters(); setShowSearchModal(false); }}
+                                    className="btn btn-primary flex-[2] py-4 text-base shadow-xl shadow-indigo-500/20"
+                                >
+                                    Search Rooms
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                )}
 
                 {/* Active Filters */}
                 {(filters.city || filters.roomType || filters.minRent || filters.maxRent) && (
