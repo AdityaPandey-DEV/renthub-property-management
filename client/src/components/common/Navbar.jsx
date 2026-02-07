@@ -140,6 +140,15 @@ const Navbar = () => {
 
                     {/* Mobile Menu Button */}
                     <div className="flex items-center gap-3 md:hidden">
+                        {isAuthenticated && (
+                            <Link
+                                to="/chat"
+                                className="p-2 rounded-lg hover:bg-secondary relative"
+                                aria-label="Messages"
+                            >
+                                <HiChatAlt2 className="text-xl text-secondary" />
+                            </Link>
+                        )}
                         <button
                             onClick={toggleTheme}
                             className="p-2 rounded-lg bg-secondary"
@@ -166,6 +175,12 @@ const Navbar = () => {
 
                             {isAuthenticated ? (
                                 <>
+                                    <Link to="/chat" className="px-4 py-2 rounded-lg hover:bg-secondary flex items-center gap-2" onClick={() => setIsOpen(false)}>
+                                        <HiChatAlt2 /> Messages
+                                    </Link>
+                                    <Link to="/notifications" className="px-4 py-2 rounded-lg hover:bg-secondary flex items-center gap-2" onClick={() => setIsOpen(false)}>
+                                        <HiBell /> Notifications
+                                    </Link>
                                     <Link to={getDashboardLink()} className="px-4 py-2 rounded-lg hover:bg-secondary" onClick={() => setIsOpen(false)}>Dashboard</Link>
                                     <button onClick={handleLogout} className="px-4 py-2 rounded-lg text-left text-red-500 hover:bg-red-500/10">Logout</button>
                                 </>
