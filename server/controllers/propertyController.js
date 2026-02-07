@@ -16,11 +16,14 @@ exports.getProperties = async (req, res, next) => {
 
         const skip = (page - 1) * limit;
 
+        const validSortFields = ['createdAt', 'views', 'price', 'rent'];
+        const apiSort = req.query.sort ? req.query.sort.split(',').join(' ') : '-createdAt';
+
         const properties = await Property.find(query)
             .populate('owner', 'name email phone')
             .skip(skip)
             .limit(parseInt(limit))
-            .sort({ createdAt: -1 });
+            .sort(apiSort);
 
         const total = await Property.countDocuments(query);
 
@@ -43,7 +46,7 @@ exports.getProperties = async (req, res, next) => {
 exports.getProperty = async (req, res, next) => {
     try {
         const property = await Property.findById(req.params.id)
-            .populate('owner', 'name email phone avatar')
+            .populate('owner', 'name email phone')
             .populate('rooms');
 
         if (!property) {

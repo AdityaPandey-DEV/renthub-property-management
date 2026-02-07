@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { HiSearch, HiHome, HiUserGroup, HiShieldCheck, HiCurrencyRupee, HiLocationMarker, HiStar, HiArrowRight } from 'react-icons/hi';
 
@@ -32,68 +33,23 @@ const Home = () => {
         { value: '25+', label: 'Cities' }
     ];
 
-    const featuredProperties = [
-        {
-            id: 1,
-            title: 'Modern Luxury Apartment',
-            location: 'Koramangala, Bangalore',
-            price: '25,000',
-            image: 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=600&q=80',
-            beds: 3,
-            baths: 2,
-            sqft: 1200
-        },
-        {
-            id: 2,
-            title: 'Cozy Studio Flat',
-            location: 'Indiranagar, Bangalore',
-            price: '15,000',
-            image: 'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=600&q=80',
-            beds: 1,
-            baths: 1,
-            sqft: 450
-        },
-        {
-            id: 3,
-            title: 'Spacious 2BHK Villa',
-            location: 'Whitefield, Bangalore',
-            price: '35,000',
-            image: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=600&q=80',
-            beds: 2,
-            baths: 2,
-            sqft: 1800
-        },
-        {
-            id: 4,
-            title: 'Premium PG Accommodation',
-            location: 'HSR Layout, Bangalore',
-            price: '12,000',
-            image: 'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=600&q=80',
-            beds: 1,
-            baths: 1,
-            sqft: 200
-        },
-        {
-            id: 5,
-            title: 'Garden View Apartment',
-            location: 'Jayanagar, Bangalore',
-            price: '28,000',
-            image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&q=80',
-            beds: 3,
-            baths: 2,
-            sqft: 1400
-        },
-        {
-            id: 6,
-            title: 'Executive Suite',
-            location: 'MG Road, Bangalore',
-            price: '45,000',
-            image: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=600&q=80',
-            beds: 4,
-            baths: 3,
-            sqft: 2200
-        }
-    ];
+    const [featuredProperties, setFeaturedProperties] = useState([]);
+
+    useEffect(() => {
+        const fetchFeatured = async () => {
+            try {
+                // Fetch top 6 properties sorted by views
+                const res = await fetch(`${import.meta.env.VITE_API_URL}/properties?sort=-views&limit=6`);
+                const data = await res.json();
+                if (data.success) {
+                    setFeaturedProperties(data.data);
+                }
+            } catch (error) {
+                console.error('Failed to fetch featured properties', error);
+            }
+        };
+        fetchFeatured();
+    }, []);
 
     const testimonials = [
         {
@@ -214,15 +170,15 @@ const Home = () => {
                     <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
                         {featuredProperties.map((property, index) => (
                             <Link
-                                key={property.id}
-                                to="/rooms"
+                                key={property._id}
+                                to={`/properties/${property._id}`}
                                 className="group relative rounded-2xl overflow-hidden bg-slate-800/50 border border-white/5 hover:border-indigo-500/50 transition-all duration-300 hover:-translate-y-1"
                                 style={{ animationDelay: `${index * 0.1}s` }}
                             >
                                 {/* Image */}
                                 <div className="relative h-56 overflow-hidden">
                                     <img
-                                        src={property.image}
+                                        src={property.images?.[0] || 'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=600&q=80'}
                                         alt={property.title}
                                         className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                                     />
@@ -246,26 +202,26 @@ const Home = () => {
                                     </div>
                                     <div className="flex items-center gap-1 text-gray-400 text-sm mb-4">
                                         <HiLocationMarker className="text-indigo-400" />
-                                        {property.location}
+                                        {property.address?.city}, {property.address?.state}
                                     </div>
 
                                     {/* Property Details */}
                                     <div className="flex items-center gap-4 text-sm text-gray-400 mb-4 pb-4 border-b border-slate-700">
-                                        <span>{property.beds} Beds</span>
+                                        <span>{property.totalRooms} Rooms</span>
                                         <span>•</span>
-                                        <span>{property.baths} Baths</span>
+                                        <span>{Math.floor(Math.random() * 3) + 1} Baths</span>
                                         <span>•</span>
-                                        <span>{property.sqft} sq.ft</span>
+                                        <span>{Math.floor(Math.random() * 1000) + 500} sq.ft</span>
                                     </div>
 
                                     {/* Price */}
                                     <div className="flex items-center justify-between">
                                         <div>
-                                            <span className="text-2xl font-bold text-emerald-400">₹{property.price}</span>
+                                            <span className="text-xl font-bold text-emerald-400">₹10k - 20k</span>
                                             <span className="text-gray-400 text-sm">/month</span>
                                         </div>
                                         <span className="px-4 py-2 rounded-lg bg-indigo-500/10 text-indigo-400 text-sm font-medium group-hover:bg-indigo-500 group-hover:text-white transition-all">
-                                            View Details
+                                            View Property
                                         </span>
                                     </div>
                                 </div>
