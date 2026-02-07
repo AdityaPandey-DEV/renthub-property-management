@@ -29,7 +29,7 @@ const Hero = () => {
             </div>
 
             <div className="container mx-auto px-4 z-10 relative">
-                <div className="flex flex-col items-center justify-center text-center max-w-5xl mx-auto h-full pt-20">
+                <div className="flex flex-col items-center justify-center text-center max-w-5xl mx-auto h-full">
                     {/* Badge with solid background */}
                     <div className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-black/50 backdrop-blur-md text-sm text-white mb-10 border border-white/20 shadow-lg">
                         <span className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></span>
