@@ -44,6 +44,7 @@ app.use('/api/bookings', bookingRoutes);
 app.use('/api/rentals', rentalRoutes);
 app.use('/api/payments', paymentRoutes);
 app.use('/api/notifications', notificationRoutes);
+app.use('/api/chats', require('./routes/chatRoutes'));
 
 // Error handler
 app.use(errorHandler);

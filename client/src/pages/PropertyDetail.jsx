@@ -12,11 +12,36 @@ import {
 } from 'react-icons/hi';
 import toast from 'react-hot-toast';
 
+import { useAuth } from '../context/AuthContext';
+import { useChat } from '../context/ChatContext';
+
 const PropertyDetail = () => {
     const { id } = useParams();
     const navigate = useNavigate();
+    const { user, isAuthenticated } = useAuth();
+    const { openChat } = useChat();
     const [property, setProperty] = useState(null);
     const [loading, setLoading] = useState(true);
+
+    const handleSendMessage = async () => {
+        if (!isAuthenticated) {
+            toast.error('Please login to send a message');
+            navigate('/login');
+            return;
+        }
+
+        if (user._id === property.owner._id) {
+            toast.error('You cannot message yourself');
+            return;
+        }
+
+        try {
+            await openChat(property.owner._id);
+            navigate('/chat');
+        } catch (error) {
+            toast.error('Failed to start chat');
+        }
+    };
 
     useEffect(() => {
         fetchProperty();
@@ -199,10 +224,16 @@ const PropertyDetail = () => {
                             </div>
 
                             <div className="space-y-4">
-                                <button className="btn btn-primary w-full">
+                                <button
+                                    onClick={handleSendMessage}
+                                    className="btn btn-primary w-full"
+                                >
                                     Send Message
                                 </button>
-                                <button className="btn btn-outline w-full">
+                                <button
+                                    onClick={() => navigate('/properties')}
+                                    className="btn btn-outline w-full"
+                                >
                                     View Other Properties
                                 </button>
                             </div>

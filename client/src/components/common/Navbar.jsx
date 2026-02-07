@@ -11,6 +11,7 @@ import {
     HiLogout,
     HiViewGrid,
     HiBell,
+    HiChatAlt2,
     HiSun,
     HiMoon
 } from 'react-icons/hi';
@@ -83,6 +84,9 @@ const Navbar = () => {
 
                         {isAuthenticated ? (
                             <div className="flex items-center gap-4">
+                                <Link to="/chat" className="relative p-2 rounded-lg hover:bg-tertiary transition-colors">
+                                    <HiChatAlt2 className="text-xl text-secondary" />
+                                </Link>
                                 <Link to="/notifications" className="relative p-2 rounded-lg hover:bg-tertiary transition-colors">
                                     <HiBell className="text-xl text-secondary" />
                                     <span className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
