@@ -15,6 +15,7 @@ import RoomDetail from './pages/RoomDetail';
 
 // Landlord Pages
 import LandlordDashboard from './pages/landlord/Dashboard';
+import AddProperty from './pages/landlord/AddProperty';
 
 // Tenant Pages
 import TenantDashboard from './pages/tenant/Dashboard';
@@ -42,6 +43,14 @@ function App() {
                   element={
                     <ProtectedRoute roles={['landlord', 'admin']}>
                       <LandlordDashboard />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path="/landlord/properties/new"
+                  element={
+                    <ProtectedRoute roles={['landlord', 'admin']}>
+                      <AddProperty />
                     </ProtectedRoute>
                   }
                 />
