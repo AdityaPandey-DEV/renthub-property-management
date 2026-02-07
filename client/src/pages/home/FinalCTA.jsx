@@ -3,7 +3,7 @@ import { HiSearch, HiArrowRight } from 'react-icons/hi';
 
 const FinalCTA = () => {
     return (
-        <section className="py-24 relative overflow-hidden bg-slate-900">
+        <section className="min-h-screen flex items-center justify-center py-24 relative overflow-hidden bg-slate-900">
             {/* Background elements */}
             <div className="absolute inset-0">
                 <img

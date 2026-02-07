@@ -43,7 +43,7 @@ const Navbar = () => {
                     {/* Logo */}
                     <Link to="/" className="flex items-center gap-2">
                         <div className="w-10 h-10 rounded-xl bg-accent-primary flex items-center justify-center shadow-lg">
-                            <HiHome className="text-white text-xl" />
+                            <HiHome className="text-primary text-xl" />
                         </div>
                         <span className="text-xl font-bold gradient-text">RentHub</span>
                     </Link>
@@ -76,7 +76,7 @@ const Navbar = () => {
                             aria-label="Toggle theme"
                         >
                             <div className="relative w-5 h-5">
-                                <HiSun className={`absolute inset-0 text-xl text-amber-500 transition-all duration-300 ${theme === 'light' ? 'opacity-100 rotate-0' : 'opacity-0 rotate-90'}`} />
+                                <HiSun className={`absolute inset-0 text-xl text-orange-600 transition-all duration-300 ${theme === 'light' ? 'opacity-100 rotate-0' : 'opacity-0 rotate-90'}`} />
                                 <HiMoon className={`absolute inset-0 text-xl text-indigo-400 transition-all duration-300 ${theme === 'dark' ? 'opacity-100 rotate-0' : 'opacity-0 -rotate-90'}`} />
                             </div>
                         </button>

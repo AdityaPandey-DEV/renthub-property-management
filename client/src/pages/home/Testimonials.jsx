@@ -24,7 +24,7 @@ const Testimonials = () => {
     ];
 
     return (
-        <section className="py-24 bg-white dark:bg-slate-900 transition-colors duration-300">
+        <section className="min-h-screen flex items-center py-24 bg-white dark:bg-slate-900 transition-colors duration-300">
             <div className="container mx-auto px-4">
                 <div className="text-center mb-16">
                     <span className="text-indigo-500 dark:text-indigo-400 font-bold tracking-widest uppercase text-sm mb-3 block">Testimonials</span>

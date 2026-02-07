@@ -55,14 +55,14 @@ const Hero = () => {
                                     className="w-full h-16 !pl-20 pr-6 rounded-2xl bg-black/40 border border-white/10 text-white placeholder-white/60 focus:bg-black/60 focus:border-indigo-400 outline-none transition-all text-lg"
                                 />
                             </div>
-                            <div className="flex gap-4">
-                                <select className="w-48 h-16 px-6 rounded-2xl bg-black/40 border border-white/10 text-white focus:bg-black/60 focus:border-indigo-400 outline-none cursor-pointer text-lg appearance-none">
+                            <div className="flex gap-4 justify-center">
+                                <select className="w-48 h-16 px-6 rounded-2xl bg-black/40 border border-white/10 text-white focus:bg-black/60 focus:border-indigo-400 outline-none cursor-pointer text-lg appearance-none text-center">
                                     <option value="" className="bg-slate-900 text-white">Room Type</option>
                                     <option value="single" className="bg-slate-900 text-white">Single</option>
                                     <option value="double" className="bg-slate-900 text-white">Double</option>
                                     <option value="triple" className="bg-slate-900 text-white">Triple</option>
                                 </select>
-                                <Link to="/rooms" className="btn btn-primary h-16 px-10 text-lg rounded-2xl hover:scale-105 shadow-xl shadow-indigo-500/20 flex items-center gap-2">
+                                <Link to="/rooms" className="btn btn-primary h-16 px-10 text-lg rounded-2xl hover:scale-105 shadow-xl shadow-indigo-500/20 flex items-center justify-center gap-2">
                                     <HiSearch className="text-xl" />
                                     Search
                                 </Link>
@@ -73,7 +73,7 @@ const Hero = () => {
                     {/* Stats - Solid background for better visibility */}
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto w-full">
                         {stats.map((stat, index) => (
-                            <div key={index} className="bg-black/60 backdrop-blur-md rounded-2xl p-6 border border-white/10 hover:bg-black/70 transition-all shadow-lg" style={{ animationDelay: `${index * 0.1}s` }}>
+                            <div key={index} className="bg-black/60 backdrop-blur-md rounded-2xl p-6 border border-white/10 hover:bg-black/70 transition-all shadow-lg flex flex-col items-center justify-center text-center" style={{ animationDelay: `${index * 0.1}s` }}>
                                 <p className="text-4xl md:text-5xl font-bold text-white mb-2">{stat.value}</p>
                                 <p className="text-white/80 font-medium">{stat.label}</p>
                             </div>

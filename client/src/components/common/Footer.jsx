@@ -13,8 +13,8 @@ const Footer = () => {
                     {/* Brand */}
                     <div>
                         <Link to="/" className="flex items-center gap-2 mb-4">
-                            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-500 to-emerald-500 flex items-center justify-center shadow-md">
-                                <HiHome className="text-white text-xl" />
+                            <div className="w-10 h-10 rounded-xl bg-accent-primary flex items-center justify-center shadow-md">
+                                <HiHome className="text-primary text-xl" />
                             </div>
                             <span className="text-xl font-bold gradient-text">RentHub</span>
                         </Link>
