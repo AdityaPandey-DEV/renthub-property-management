@@ -142,7 +142,7 @@ const AllProperties = () => {
 
                 {/* Mobile Search Modal */}
                 {showSearchModal && (
-                    <div className="fixed inset-0 z-[60] bg-zinc-950/95 backdrop-blur-xl flex flex-col animate-fadeIn">
+                    <div className="fixed inset-0 z-[60] bg-slate-900/95 backdrop-blur-xl flex flex-col animate-fadeIn">
                         {/* Modal Header */}
                         <div className="p-4 flex items-center justify-between border-b border-white/10">
                             <h2 className="text-lg font-semibold">Search Properties</h2>
