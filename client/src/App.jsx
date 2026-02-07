@@ -13,6 +13,7 @@ import Register from './pages/Register';
 import Rooms from './pages/Rooms';
 import RoomDetail from './pages/RoomDetail';
 import PropertyDetail from './pages/PropertyDetail';
+import AllProperties from './pages/AllProperties';
 
 // Landlord Pages
 import LandlordDashboard from './pages/landlord/Dashboard';
@@ -41,7 +42,7 @@ function App() {
                 <Route path="/rooms" element={<Rooms />} />
                 <Route path="/rooms/:id" element={<RoomDetail />} />
                 <Route path="/properties/:id" element={<PropertyDetail />} />
-                <Route path="/properties" element={<Rooms />} />
+                <Route path="/properties" element={<AllProperties />} />
 
                 {/* Landlord Routes */}
                 <Route
