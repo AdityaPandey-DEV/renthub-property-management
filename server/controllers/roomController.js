@@ -156,7 +156,9 @@ exports.createRoom = async (req, res, next) => {
 
         // Update property room count
         property.totalRooms += 1;
-        property.availableRooms += 1;
+        if (room.status === 'vacant') {
+            property.availableRooms += 1;
+        }
         await property.save();
 
         res.status(201).json({

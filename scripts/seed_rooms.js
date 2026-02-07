@@ -64,10 +64,11 @@ async function seedRooms() {
             for (let j = 0; j < batchSize && i + j < properties.length; j++) {
                 const property = properties[i + j];
 
-                // Randomly decide how many rooms to add (1-3)
-                const numRooms = Math.floor(Math.random() * 3) + 1;
+                // Randomly decide how many rooms to add (3-8)
+                const numRooms = Math.floor(Math.random() * 6) + 3;
 
                 for (let k = 0; k < numRooms; k++) {
+                    const status = Math.random() < 0.7 ? 'vacant' : (Math.random() < 0.9 ? 'occupied' : 'maintenance');
                     const roomData = {
                         property: property._id,
                         roomNumber: `${Math.floor(Math.random() * 100) + 100}-${String.fromCharCode(65 + k)}`,
@@ -76,9 +77,10 @@ async function seedRooms() {
                         rent: Math.floor(Math.random() * 15000) + 5000,
                         deposit: Math.floor(Math.random() * 50000) + 10000,
                         amenities: getRandomSubarray(amenitiesList, 3),
-                        images: [property.images[0] || 'https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?w=600&q=80'], // Use property image or default
+                        images: [property.images[0] || 'https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?w=600&q=80'],
                         area: Math.floor(Math.random() * 300) + 100,
-                        description: 'A comfortable room with great amenities.'
+                        description: 'A comfortable room with great amenities.',
+                        status: status
                     };
                     batchPromises.push(axios.post(`${API_URL}/rooms`, roomData, config));
                     roomsAdded++;

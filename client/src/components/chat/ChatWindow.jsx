@@ -1,10 +1,10 @@
 import { useState, useEffect, useRef } from 'react';
 import { useChat } from '../../context/ChatContext';
 import { useAuth } from '../../context/AuthContext';
-import { HiPaperAirplane, HiUserCircle } from 'react-icons/hi';
+import { HiPaperAirplane, HiUserCircle, HiArrowLeft } from 'react-icons/hi';
 
 const ChatWindow = () => {
-    const { currentChat, messages, sendMessage, loadingMessages } = useChat();
+    const { currentChat, messages, sendMessage, loadingMessages, setCurrentChat } = useChat();
     const { user } = useAuth();
     const [newMessage, setNewMessage] = useState('');
     const messagesEndRef = useRef(null);
@@ -42,6 +42,12 @@ const ChatWindow = () => {
         <div className="flex flex-col h-full bg-gray-50 dark:bg-slate-900">
             {/* Header */}
             <div className="p-4 bg-white dark:bg-slate-800 border-b border-gray-200 dark:border-slate-700 flex items-center gap-3 shadow-sm z-10">
+                <button
+                    onClick={() => setCurrentChat(null)}
+                    className="md:hidden p-2 -ml-2 text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-slate-700 rounded-full"
+                >
+                    <HiArrowLeft className="text-xl" />
+                </button>
                 {otherParticipant?.avatar ? (
                     <img
                         src={otherParticipant.avatar}
@@ -71,8 +77,8 @@ const ChatWindow = () => {
                             >
                                 <div
                                     className={`max-w-[70%] rounded-2xl p-3 shadow-sm ${isMe
-                                            ? 'bg-indigo-600 text-white rounded-tr-none'
-                                            : 'bg-white dark:bg-slate-800 text-gray-800 dark:text-gray-200 rounded-tl-none border border-gray-200 dark:border-slate-700'
+                                        ? 'bg-indigo-600 text-white rounded-tr-none'
+                                        : 'bg-white dark:bg-slate-800 text-gray-800 dark:text-gray-200 rounded-tl-none border border-gray-200 dark:border-slate-700'
                                         }`}
                                 >
                                     <p>{msg.content}</p>
