@@ -37,12 +37,12 @@ const Navbar = () => {
     const isActive = (path) => location.pathname === path;
 
     return (
-        <nav className="glass fixed top-0 left-0 right-0 z-50">
+        <nav className="fixed top-0 left-0 right-0 z-50 bg-bg-glass backdrop-blur-md border-b border-white/10 shadow-lg">
             <div className="container mx-auto px-4">
                 <div className="flex items-center justify-between h-16">
                     {/* Logo */}
                     <Link to="/" className="flex items-center gap-2">
-                        <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-500 to-emerald-500 flex items-center justify-center shadow-lg">
+                        <div className="w-10 h-10 rounded-xl bg-accent-primary flex items-center justify-center shadow-lg">
                             <HiHome className="text-white text-xl" />
                         </div>
                         <span className="text-xl font-bold gradient-text">RentHub</span>
@@ -94,15 +94,25 @@ const Navbar = () => {
                                     <HiViewGrid />
                                     <span>Dashboard</span>
                                 </Link>
-                                <div className="flex items-center gap-3">
-                                    <div className="w-9 h-9 rounded-full bg-gradient-to-br from-indigo-500 to-purple-500 flex items-center justify-center text-white font-medium shadow-md">
-                                        {user?.name?.charAt(0).toUpperCase()}
+                                <Link to="/about" className="flex items-center gap-3 hover:bg-secondary/50 p-1.5 rounded-lg transition-colors group">
+                                    <div className="w-9 h-9 rounded-full overflow-hidden border border-border-color group-hover:border-accent-primary transition-colors">
+                                        {user?.avatar ? (
+                                            <img
+                                                src={`${import.meta.env.VITE_API_URL.replace('/api', '')}${user.avatar}`}
+                                                alt={user.name}
+                                                className="w-full h-full object-cover"
+                                            />
+                                        ) : (
+                                            <div className="w-full h-full bg-accent-primary flex items-center justify-center text-white font-medium">
+                                                {user?.name?.charAt(0).toUpperCase()}
+                                            </div>
+                                        )}
                                     </div>
                                     <div className="hidden lg:block">
-                                        <p className="text-sm font-medium text-primary">{user?.name}</p>
+                                        <p className="text-sm font-medium text-primary group-hover:text-accent-primary transition-colors">{user?.name}</p>
                                         <p className="text-xs text-muted capitalize">{user?.role}</p>
                                     </div>
-                                </div>
+                                </Link>
                                 <button
                                     onClick={handleLogout}
                                     className="p-2 rounded-lg hover:bg-red-500/10 text-red-500 transition-colors"

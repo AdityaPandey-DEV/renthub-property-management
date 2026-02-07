@@ -104,7 +104,7 @@ const AllProperties = () => {
                             name="propertyType"
                             value={filters.propertyType}
                             onChange={handleFilterChange}
-                            className="input w-full lg:w-48 h-12"
+                            className="input w-full lg:w-40 h-12"
                         >
                             {propertyTypes.map(type => (
                                 <option key={type.value} value={type.value}>{type.label}</option>

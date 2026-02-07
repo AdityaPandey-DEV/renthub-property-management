@@ -14,6 +14,8 @@ import Rooms from './pages/Rooms';
 import RoomDetail from './pages/RoomDetail';
 import PropertyDetail from './pages/PropertyDetail';
 import AllProperties from './pages/AllProperties';
+import AboutMe from './pages/AboutMe';
+import Notifications from './pages/Notifications';
 
 // Landlord Pages
 import LandlordDashboard from './pages/landlord/Dashboard';
@@ -33,7 +35,7 @@ function App() {
         <AuthProvider>
           <div className="min-h-screen flex flex-col">
             <Navbar />
-            <main className="flex-1">
+            <main className="flex-1 pt-16">
               <Routes>
                 {/* Public Routes */}
                 <Route path="/" element={<Home />} />
@@ -43,6 +45,22 @@ function App() {
                 <Route path="/rooms/:id" element={<RoomDetail />} />
                 <Route path="/properties/:id" element={<PropertyDetail />} />
                 <Route path="/properties" element={<AllProperties />} />
+                <Route
+                  path="/about"
+                  element={
+                    <ProtectedRoute>
+                      <AboutMe />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path="/notifications"
+                  element={
+                    <ProtectedRoute>
+                      <Notifications />
+                    </ProtectedRoute>
+                  }
+                />
 
                 {/* Landlord Routes */}
                 <Route

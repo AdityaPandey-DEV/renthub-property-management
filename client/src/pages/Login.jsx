@@ -75,7 +75,7 @@ const Login = () => {
                                     value={formData.email}
                                     onChange={handleChange}
                                     placeholder="Enter your email"
-                                    className="input pl-12"
+                                    className="input !pl-12"
                                     required
                                 />
                             </div>
@@ -91,7 +91,7 @@ const Login = () => {
                                     value={formData.password}
                                     onChange={handleChange}
                                     placeholder="Enter your password"
-                                    className="input pl-12 pr-12"
+                                    className="input !pl-12 pr-12"
                                     required
                                 />
                                 <button

@@ -5,9 +5,11 @@ const {
     login,
     getMe,
     updateProfile,
-    updatePassword
+    updatePassword,
+    uploadAvatar
 } = require('../controllers/authController');
 const { protect } = require('../middleware/auth');
+const upload = require('../middleware/upload');
 
 const router = express.Router();
 
@@ -49,5 +51,7 @@ router.put(
     ],
     updatePassword
 );
+
+router.post('/avatar', protect, upload.single('avatar'), uploadAvatar);
 
 module.exports = router;

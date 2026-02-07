@@ -95,7 +95,7 @@ const Rooms = () => {
                             name="roomType"
                             value={filters.roomType}
                             onChange={handleFilterChange}
-                            className="input w-full lg:w-48 h-12"
+                            className="input w-full lg:w-40 h-12"
                         >
                             {roomTypes.map(type => (
                                 <option key={type.value} value={type.value}>{type.label}</option>

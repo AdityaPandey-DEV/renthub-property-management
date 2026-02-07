@@ -112,7 +112,7 @@ const Register = () => {
                                     value={formData.name}
                                     onChange={handleChange}
                                     placeholder="Enter your full name"
-                                    className="input pl-12"
+                                    className="input !pl-12"
                                     required
                                 />
                             </div>
@@ -128,7 +128,7 @@ const Register = () => {
                                     value={formData.email}
                                     onChange={handleChange}
                                     placeholder="Enter your email"
-                                    className="input pl-11"
+                                    className="input !pl-12"
                                     required
                                 />
                             </div>
@@ -144,7 +144,7 @@ const Register = () => {
                                     value={formData.phone}
                                     onChange={handleChange}
                                     placeholder="10-digit phone number"
-                                    className="input pl-11"
+                                    className="input !pl-12"
                                     pattern="[0-9]{10}"
                                 />
                             </div>
@@ -160,7 +160,7 @@ const Register = () => {
                                     value={formData.password}
                                     onChange={handleChange}
                                     placeholder="At least 6 characters"
-                                    className="input pl-11 pr-11"
+                                    className="input !pl-12 pr-12"
                                     required
                                 />
                                 <button
@@ -183,7 +183,7 @@ const Register = () => {
                                     value={formData.confirmPassword}
                                     onChange={handleChange}
                                     placeholder="Confirm your password"
-                                    className="input pl-12"
+                                    className="input !pl-12"
                                     required
                                 />
                             </div>
